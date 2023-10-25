@@ -1,4 +1,4 @@
-// Responses in random order
+// Responses come back in random order
 function fetchLoop(n) {
 	for (let i = 0; i <= n; i++) {
 		fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
@@ -10,13 +10,16 @@ function fetchLoop(n) {
 
 fetchLoop(15);
 
-// — Async/Await — Responses in ascending order
+// — Async/Await — Responses come back in ascending order
 async function asyncFetchLoop(n) {
 	for (let i = 0; i <= n; i++) {
-		await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
-			.then(response => response.json())
-			.then(data => console.log(data.id))
-			.catch(error => console.error(error));
+		try {
+			const rawResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+			const objData = await rawResponse.json();
+			console.log(objData.id); // log ids to see them coming back in ascending order
+		} catch {
+			error => console.error(error);
+		}
 	}
 }
 
