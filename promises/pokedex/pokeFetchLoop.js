@@ -17,8 +17,8 @@ async function asyncFetchLoop(n) {
 			const rawResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
 			const objData = await rawResponse.json();
 			console.log(objData.id); // log ids to see them coming back in ascending order
-		} catch {
-			error => console.error(error);
+		} catch (error) {
+			console.error(error);
 		}
 	}
 }
