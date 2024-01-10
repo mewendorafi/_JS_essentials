@@ -3,7 +3,7 @@
 ## Table Of Contents
 
 - [Definition](#definition)
-- [Parameters & Arguments](#parameters-&-arguments)
+- [Input Parameters](#input-parameters)
 - [Function Types](#function-types)
 
 ### Definition
@@ -17,15 +17,15 @@ Les parenthèses après le nom de la fonction sont obligatoires !
 
 ```js
 function _fn() {
-	console.log('Je suis le code exécuté par la fonction');
+  console.log('Je suis le code exécuté par la fonction');
 }
 
-_fn() // On appelle la fonction pour exécuter le code défini dans son bloc { ... }.
+_fn(); // On appelle la fonction pour exécuter le code défini dans son bloc { ... }.
 ```
 
 Les parenthèses sont obligatoires pour appeler la fonction, sinon il s'agit juste d'une référence sans exécution.
 
-### Parameters & Arguments
+### Input Parameters
 
 Une fonction permet non seulement d'éviter la répétition, mais aussi de réaliser un traitement générique. C'est-à-dire, d'exécuter une même suite d'instructions pour des valeurs différentes en entrée (input).
 
@@ -37,10 +37,10 @@ Quant aux arguments, ils désignent les valeurs réelles passées en entrée à 
 
 ```js
 function toUpperCase(firstname, lastname) {
-	return firstname.toUpperCase() + ' ' + lastname.toUpperCase();
+  return firstname.toUpperCase() + ' ' + lastname.toUpperCase();
 
-	// Alternative en template literal:
-	// return `${firstname.toUpperCase()} ${lastname.toUpperCase()}`;
+  // Alternative en template literal:
+  // return `${firstname.toUpperCase()} ${lastname.toUpperCase()}`;
 }
 ```
 
@@ -61,6 +61,7 @@ console.log(user2); // FRANCIS NGANNOU
 Exhaustive list of the technical differences between function declarations, function expressions, and arrow functions:
 
 **Function Declarations:**
+
 - Declared using the `function` keyword.
 - Can be named or anonymous.
 - Have their own `this` context (references the context of the containing block).
@@ -69,6 +70,7 @@ Exhaustive list of the technical differences between function declarations, func
 - Hoisted to the top of their containing scope (advanced — cf. [Hoisting](https://developer.mozilla.org/fr/docs/Glossary/Hoisting)).
 
 **Function Expressions:**
+
 - Defined using the `function` keyword, with or without a name.
 - Have their own `this` context.
 - Have their own `arguments` object.
