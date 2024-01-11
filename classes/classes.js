@@ -1,74 +1,108 @@
 // on peut définir le principe de classe comme une "usine à objets"
 class User {
 	// — define the class attributes with the "constructor" keyword
-	constructor(username, age, activity) {
-		this.username = username;
+	constructor(username, age) {
 		this.age = age;
-		this.activity = activity;
+		this.username = username;
 	}
 	// — getters (methods to retrieve the value tied to a specific key)
-	getUsername() {
-		return this.username;
-	}
 	getAge() {
 		return this.age;
 	}
-	getActivity() {
-		return this.activity;
+	getUsername() {
+		return this.username;
 	}
 	// — setters (methods to mutate the value tied to a specific key)
-	setUsername(arg) {
-		this.username = arg;
+	setAge(age) {
+		this.age = age;
 	}
-	setAge(arg) {
-		this.age = arg;
-	}
-	setActivity(arg) {
-		this.activity = arg;
+	setUsername(username) {
+		this.username = username;
 	}
 }
 
-const newUser = new User('Méwen', 26, 'Historian');
+const userInstance = new User('John', 25);
 
-// console.log(newUser);
-// console.log(newUser.getUsername());
+// console.log(userInstance);
+// console.log(userInstance.getUsername());
 
-newUser.setActivity('Developer');
-// console.log(newUser.getActivity());
-// console.log(newUser);
+userInstance.setAge(30);
+// console.log(userInstance);
+// console.log(userInstance.getAge());
 
-// — create a new Admin class with the "extends" keyword
-// — this new Admin class is based on the User class (inherits from the User class attributes)
-class Admin extends User {
-	constructor(username, age, activity, role) {
+// — create a new Employee class with the "extends" keyword
+// — the Employee class is based on the User class (inherits from the User class attributes)
+class Employee extends User {
+	constructor(username, age, role, company) {
 		// — define the inheritance from the User class with the "super" keyword
-		super(username, age, activity);
+		super(username, age);
 		// — create a new attribute only for the Admin class
 		this.role = role;
+		this.company = company;
 	}
 	getRole() {
 		return this.role;
 	}
+	getCompany() {
+		return this.company;
+	}
 	setRole(role) {
 		this.role = role;
 	}
+	setCompany(company) {
+		this.company = company;
+	}
 }
 
-const newAdmin = new Admin('Méwen', 26, 'Developer', 'Admin');
+const employeeInstance = new Employee('Jane', 35, 'Developer', 'TechCompany');
 
-// console.log(newAdmin);
-// console.log(newAdmin.getUsername());
+// console.log(employeeInstance);
+// console.log(employeeInstance.getUsername());
 
-newAdmin.setActivity('Teacher');
-// console.log(newAdmin);
+employeeInstance.setRole('CTO');
+// console.log(employeeInstance);
 
-// - get and set values of an object, using dot notation for nested keys
+// — cleaner code for a class that takes too many input parameters (pass an object instead)
+class Customer extends User {
+	constructor({ username, age, address, iban }) {
+		super(username, age);
+
+		this.age = age;
+		this.iban = iban;
+		this.address = address;
+		this.username = username;
+	}
+	getIban() {
+		return this.iban;
+	}
+	getAddress() {
+		return this.address;
+	}
+	setIban(iban) {
+		this.iban = iban;
+	}
+	setAddress(address) {
+		this.address = address;
+	}
+}
+
+// — this way, you just have to pass an object without worrying about the order of input parameters
+const customerInstance = new Customer({
+	username: 'Frank',
+	age: 30,
+	address: 'Examplestreet 42',
+	iban: 'FR76 3000 0000 1111 2222 3333',
+});
+
+// console.log(customerInstance);
+
+// — custom class to get and set values of a nested object, using dot notation for nested keys
 class NestedObject {
 	constructor(object) {
 		this.object = object;
 	}
 
-	getObjectKeyValue(path) {
+	getValue(path) {
 		const keys = path.split('.');
 		let object = this.object;
 
@@ -85,7 +119,7 @@ class NestedObject {
 		return object;
 	}
 
-	setObjectKeyValue(path, value) {
+	setValue(path, value) {
 		const keys = path.split('.');
 		let object = this.object;
 
@@ -125,4 +159,14 @@ const sampleObject = {
 	},
 };
 
-const nestedObj = new NestedObject(sampleObject);
+const nestedObjectInstance = new NestedObject(sampleObject);
+
+console.log(nestedObjectInstance);
+// console.log(nestedObjectInstance.getValue('person.name'));
+// console.log(nestedObjectInstance.getValue('company.departments.sales.team'));
+
+// nestedObjectInstance.setValue('person.age', 31);
+// console.log(nestedObjectInstance.getValue('person.age'));
+
+// nestedObjectInstance.setValue('company.departments.marketing.team', 'Marketing');
+// console.log(nestedObjectInstance.getValue('company.departments.marketing.team'));
